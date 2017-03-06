@@ -1,0 +1,81 @@
+html,
+body,
+ul,
+li,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+img,
+input,
+span,
+div,
+form {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 100%;
+}
+
+img,
+input {
+    border: 0
+}
+
+body {
+    width: 100%;
+    color: #000;
+    font-family: 'Playfair Display';
+    background: #f4f6f8;
+}
+
+.clearfix:after {
+    content: "";
+    display: block;
+    height: 0;
+    line-height: 0;
+    visibility: hidden;
+    clear: both;
+}
+
+.clearfix {
+    zoom: 1
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    box-sizing: border-box;
+    display: inline-block;
+}
+
+a:link,
+a:visited,
+a:hover,
+a:active {
+    text-decoration: none;
+}
+
+.red {
+    color: red;
+}
+
+.fb {
+    font-weight: 700;
+}

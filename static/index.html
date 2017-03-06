@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="css/pub.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="box">
+        <!--侧边栏-->
+        <div id="aside">
+            <div class="head">
+                <div class="img">
+                    <img src="../images/eye.jpg">
+                </div>
+                <h5>吉米</h5>
+            </div>
+            <div class="nav">
+                <ul>
+                    <li>
+                        <router-link to='/fn1'><span class='glyphicon glyphicon-home'></span>仪表盘</router-link>
+                    </li>
+                    <li>
+                        <router-link to='/fn2'><span class='glyphicon glyphicon-bell'></span>用户管理</router-link>
+                    </li>
+                    <li>
+                        <router-link to='/fn3'><span class='glyphicon glyphicon-bell'></span>讲师管理</router-link>
+                    </li>
+                    <li id='task'>
+                        <a href="#">
+                            <span class='glyphicon glyphicon-cog'></span>课程管理<span class='glyphicon glyphicon-menu-right'></span>
+                        </a>
+                        <ul id="task-ul">
+                            <li>
+                                <a href="#">课程添加</a>
+                            </li>
+                            <li>
+                                <a href="#">课程列表</a>
+                            </li>
+                            <li>
+                                <a href="#">课程分类</a>
+                            </li>
+                            <li>
+                                <a href="#">课程专题</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><span class='glyphicon glyphicon-bell'></span>广告管理</a></li>
+                    <li id='sys'>
+                        <a href="#">
+                            <span class='glyphicon glyphicon-cog'></span>系统设置<span class='glyphicon glyphicon-menu-right'></span>
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="#">网站设置</a>
+                            </li>
+                            <li>
+                                <a href="#">权限管理</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--头部-->
+        <div id="top">
+            <div class="top-content">
+                <!--没有的图标-->
+                <div class="icon">
+                    <a href="#"><span class='glyphicon glyphicon-menu-hamburger'></span></a>
+                </div>
+                <!--功能栏-->
+                <ul class="top-r">
+                    <li><a href="#"><span class='glyphicon glyphicon-bell'></span></a></li>
+                    <li>
+                        <a href="#"><span class='glyphicon glyphicon-user'></span>个人中心</a>
+                    </li>
+                    <li><a href="#"><span class='glyphicon glyphicon-log-out'></span>退出</a></li>
+                    <li><a href="#"><span class='glyphicon glyphicon-tasks'></span></a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="content">
+            <router-view></router-view>
+        </div>
+    </div>
+    <script src="lib/js/vue.js"></script>
+    <script src='lib/js/vue-router.min.js'></script>
+    <script src='main.js'></script>
+</body>
+<script>
+</script>
+
+</html>
