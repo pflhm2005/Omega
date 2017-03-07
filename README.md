@@ -16,22 +16,22 @@ node-dev app(node app)
 
 ```javascript
 -router 					//路由配置文件夹
---api_router.js				//路由js文件 负责转接请求
+---api_router.js				//路由js文件 负责转接请求
 
 -static						//静态资源文件夹
---css						//样式文件夹
----...
+---css						//样式文件夹
+------...
 
---images					//图片资源
----...
+---images					//图片资源
+------...
 
---js						//主JS文件夹
----common.js				//暂时封装了一个ajax模块
----main.js					//配置vue路由与根元素挂载
+---js						//主JS文件夹
+------common.js				//暂时封装了一个ajax模块
+------main.js					//配置vue路由与根元素挂载
 
---lib						//第三方js与css文件
+---lib						//第三方js与css文件
 
---vue						//vue单文件文件夹
+---vue						//vue单文件文件夹
 
 -app.js						//服务器配置相关
 -package.json				//项目依赖包目录

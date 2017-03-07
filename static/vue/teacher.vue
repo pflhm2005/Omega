@@ -11,7 +11,7 @@
                   </div>
                   <div class="select">
                         <div>
-                              <input type="text" id='sear_text'>
+                              <input type="text" id='sear_text' v-tel>
                               <button class='sear' @click='sear'>搜索</button>
                         </div>
                   </div>
@@ -168,7 +168,7 @@
                   },
                   //搜索
                   sear:function(){
-                        var input = document.getElementById('sear_text'),
+                        var input = _.el('#sear_text'),
                             val = input.value,
                             len = this.teacher.length;
                         for(var i = 0; i < len; i++){

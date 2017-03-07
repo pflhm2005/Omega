@@ -1,4 +1,4 @@
-var _ = (function() {
+var _ = (function(window, $) {
     // 自封装ajax请求
     // 应该不会用到get了
     function ajax(obj) {
@@ -32,7 +32,31 @@ var _ = (function() {
         }
         return finalData.slice(0, -1);
     };
-    return {
-        ajax: ajax
+
+    //选择符
+    var getId = str => $.getElementById(str);
+    var getTag = str => $.getElementsByTagName(str);
+    var getClass = str => $.getElementsByClassName(str);
+    var advSear = str => $.querySelectorAll(str);
+    var rquickExpr = /^(?:#([\w-]+)|(\w+)|\.([\w-]+))$/;
+
+    function el(ele) {
+        if (rquickExpr.test(ele)) {
+            match = rquickExpr.exec(ele);
+            if (match = match[1]) {
+                return getId(match);
+            } else if (match = match[2]) {
+                return getTag(match);
+            } else if (match = match[3]) {
+                return getClass(match);
+            }
+        }
+        if ($.querySelectorAll) {
+            return advSear(ele);
+        }
     }
-})();
+    return {
+        ajax: ajax,
+        el: el
+    }
+})(window, document);

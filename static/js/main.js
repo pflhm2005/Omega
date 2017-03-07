@@ -13,6 +13,14 @@ const router = new VueRouter({
     ]
 });
 
+Vue.directive('tel', {
+    update: function(el) {
+        el.onblur = function() {
+            console.log(el.value);
+        }
+    }
+});
+
 //挂载到对应DOM节点 并传入路由
 new Vue({
     el: "#box",
@@ -20,13 +28,13 @@ new Vue({
     methods: {
         //侧边栏的下拉滑动
         task_slide: function() {
-            this.aside_toggle('task-ul');
+            this.aside_toggle('#task-ul');
         },
         setting_slide: function() {
-            this.aside_toggle('setting');
+            this.aside_toggle('#setting');
         },
         aside_toggle: function(str) {
-            var ele = document.getElementById(str),
+            var ele = _.el(str),
                 eles = ele.children,
                 len = eles.length,
                 height = parseInt(window.getComputedStyle(eles[0]).height);

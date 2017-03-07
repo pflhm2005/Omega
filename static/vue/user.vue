@@ -84,7 +84,7 @@
             methods:{
                   //搜索
                   sear:function(){
-                        var input = document.getElementById('sear_text'),
+                        var input = _('#sear_text'),
                         val = input.value,
                         len = this.user.length;
                         for(var i = 0; i < len; i++){
@@ -96,13 +96,13 @@
                   },
                   //排序
                   sort:function(){
-                        var arg = this.getSelected('sort');
+                        var arg = this.getSelected('#sort');
                         this.user.sort(function(a,b){
                               return a[arg]>b[arg];
                         });
                   },
                   getSelected:function(str){
-                        var ele = document.getElementById(str),
+                        var ele = _.el(str),
                         index= ele.selectedIndex;
                         return  ele.options[index].value;
                   },
