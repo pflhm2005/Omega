@@ -7,12 +7,12 @@
             </div>
             <div class="main">
                   <div class="add"> 
-                        <a href="#">添加讲师</a>
+                        <a @click='mask=true'>添加讲师</a>
                   </div>
                   <div class="select">
                         <div>
-                              <input type="text">
-                              <button class='sear'>搜索</button>
+                              <input type="text" id='sear_text'>
+                              <button class='sear' @click='sear'>搜索</button>
                         </div>
                   </div>
                   <table>
@@ -28,24 +28,92 @@
                               </tr>
                         </thead>
                         <tbody>
-                              <tr>
-                                    <td>1</td>
-                                    <td>赵玉川</td>
-                                    <td>布头儿</td>
-                                    <td>28</td>
-                                    <td>男</td>
-                                    <td>15901256171</td>
-                                    <td>
-                                          <a href="#" class="btn-check">查 看</a>
-                                          <a href="#" class="btn-edit">编 辑</a>
-                                          <a href="#" class="btn-del">注 销</a>
-                                    </td>
-                              </tr>
+                              <template v-for="(list,index) in teacher">
+                                    <tr>
+                                          <td>{{index+1}}</td>
+                                          <td>{{list.name}}</td>
+                                          <td>{{list.nickname}}</td>
+                                          <td>{{list.age}}</td>
+                                          <td>{{list.sex}}</td>
+                                          <td>{{list.tel}}</td>
+                                          <td>
+                                                <a href="#" class="btn-check">查 看</a>
+                                                <a href="#" class="btn-edit">编 辑</a>
+                                                <a href="#" class="btn-del">注 销</a>
+                                          </td>
+                                    </tr>
+                              </template>
                         </tbody>
                   </table>
             </div>
+            <div class="mask" v-show='mask' @click.self='mask=false'>
+                  <form class='add_teacher' action='/index/add' method='post'>
+                        <span class='del glyphicon glyphicon-remove' @click='mask=false'></span>
+                        <div>
+                              <label>姓名</label>
+                              <input type="text" v-model='name'>
+                        </div>
+                        <div>
+                              <label>昵称</label>
+                              <input type="text" v-model='nickname'>
+                        </div>
+                        <div>
+                              <label>年龄</label>
+                              <input type="text" v-model='age'>
+                        </div>
+                        <div>
+                              <label>性别</label>
+                              <input type="radio" checked>男<input type="radio">女
+                        </div>
+                        <div>
+                              <label>手机号码</label>
+                              <input type="text" v-model='tel'>
+                        </div>
+                        <div class='btn'>
+                              <input type="reset">
+                              <input type="submit">
+                        </div>
+                  </form>
+            </div>
       </div>
 </template>
+<script>
+      export default{
+            data(){
+                  return {
+                        name:null,
+                        nickname:null,
+                        age:null,
+                        sex:null,
+                        tel:null,
+                        mask:false, 
+                        teacher:[
+                              {'name':'赵玉川','nickname':'布头儿','age':28,'sex':'男','tel':'15901256171'},                       
+                              {'name':'赵玉川2','nickname':'布头儿','age':28,'sex':'男','tel':'15901256171'},                       
+                              {'name':'赵玉川3','nickname':'布头儿','age':28,'sex':'男','tel':'15901256171'},                       
+                        ]
+                  }
+            },
+            methods:{
+                  //搜索
+                  sear:function(){
+                        var input = document.getElementById('sear_text'),
+                        val = input.value,
+                        len = this.teacher.length;
+                        for(var i = 0; i < len; i++){
+                              if(this.teacher[i].name === val){
+                                    this.teacher.splice(0,len,this.teacher[i]);
+                                    break;
+                              }
+                        }
+                  },
+                  //添加讲师
+                  add:function(){
+                        console.log(this.sex);
+                  }
+            }
+      }
+</script>
 <style lang="less">
       .list-3{
             >.addr{
@@ -60,6 +128,63 @@
                         padding:0 5px;
                   }
             }
+            >.mask{
+                  position:fixed;
+                  top:0;
+                  left:0;
+                  width:100%;
+                  height:100%;
+                  background-color:rgba(0,0,0,.5);
+                  z-index:999;
+                  >.add_teacher{
+                        position:relative;
+                        width:30%;
+                        margin:100px auto;
+                        background-color:white;
+                        padding:20px 0;
+                        >.del{
+                              position:absolute;
+                              right:10px;
+                              top:10px;
+                              cursor:pointer;
+                              border:1px solid #ddd;
+                              color:#aaa;
+                        }
+                        >div{
+                              margin:20px 0 20px 20px;
+                              >label{
+                                    text-align:right;
+                                    width:70px;
+                                    display:inline-block;
+                              }
+                              >input{
+                                    margin-left:10px;
+                                    font-size:12px;
+                                    height:30px;
+                                    line-height:30px;
+                                    padding:0 10px;
+                              }
+                              >input[type='text']{
+                                    border:1px solid #ddd;
+                                    width:60%;
+                              }
+                              >input[type='radio']{
+                                    margin:0 10px;
+                                    vertical-align:middle;
+                              }
+                        }
+                        >.btn{
+                              height:30px;
+                              line-height:30px;
+                              text-align:center;
+                              margin:0;
+                              >input[type='submit']{
+                                    background-color:#31b0d5;
+                                    color:white;
+                              }
+                        }
+                  }
+            }
             >.main{
                   margin-bottom:20px;
                   >.add{
@@ -67,7 +192,9 @@
                         padding:10px 15px;
                         background-color:#fff;
                         overflow:hidden;
-                        a{
+                        >a{
+                              user-select:none;
+                              cursor:pointer;
                               float:right;
                               color:white;
                               padding:5px 10px;

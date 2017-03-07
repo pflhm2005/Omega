@@ -21,4 +21,10 @@ api.post('/', function(req, res) {
     }
 });
 
+api.post('/add', function(req, res) {
+    console.log(req.body);
+    console.log(req.url);
+    res.send(200);
+})
+
 module.exports = api;

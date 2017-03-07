@@ -8,17 +8,17 @@
             <div class="main">
                   <div class="select">
                         <form action="">
-                              <select name="" id="">
-                                    <option value="">按年龄</option>
-                                    <option value="">按性别</option>
-                                    <option value="">按地区</option>
-                                    <option value="">按日期</option>
+                              <select id='sort'>
+                                    <option value="age">按年龄</option>
+                                    <option value="sex">按性别</option>
+                                    <option value="area">按地区</option>
+                                    <option value="score">按积分</option>
                               </select>
-                              <button class='btn-sort'>筛选</button>
+                              <a class='btn-sort' @click='sort'>筛选</a>
                         </form>
                         <div>
-                              <input type="text">
-                              <button class='sear'>搜索</button>
+                              <input type="text" id='sear_text'>
+                              <a class='sear' @click='sear'>搜索</a>
                         </div>
                   </div>
                   <table>
@@ -71,15 +71,44 @@
             data(){
                   return {
                         user:[
-                              {'account':'botue@sina.com','name':'布头儿','age':28,'sex':'男','area':'河北省','tel':'15901256171','score':'24','reg_time':'2016/05/01 10:12:32','log_time':'2016/05/10 12:16:19'},
-                              {'account':'botue@sina.com','name':'布头儿2','age':25,'sex':'男','area':'河北省','tel':'15901256171','score':'24','reg_time':'2016/05/01 10:12:32','log_time':'2016/05/10 12:16:19'},
-                              {'account':'botue@sina.com','name':'布头儿3','age':23,'sex':'男','area':'河北省','tel':'15901256171','score':'24','reg_time':'2016/05/01 10:12:32','log_time':'2016/05/10 12:16:19'},
-                              {'account':'botue@sina.com','name':'布头儿4','age':25,'sex':'男','area':'河北省','tel':'15901256171','score':'24','reg_time':'2016/05/01 10:12:32','log_time':'2016/05/10 12:16:19'},
-                              {'account':'botue@sina.com','name':'布头儿5','age':27,'sex':'男','area':'河北省','tel':'15901256171','score':'24','reg_time':'2016/05/01 10:12:32','log_time':'2016/05/10 12:16:19'},
-                              {'account':'botue@sina.com','name':'布头儿6','age':22,'sex':'男','area':'河北省','tel':'15901256171','score':'24','reg_time':'2016/05/01 10:12:32','log_time':'2016/05/10 12:16:19'},
-                              {'account':'botue@sina.com','name':'布头儿7','age':21,'sex':'男','area':'河北省','tel':'15901256171','score':'24','reg_time':'2016/05/01 10:12:32','log_time':'2016/05/10 12:16:19'},
+                              {'account':'botue@sina.com','name':'布头儿','age':28,'sex':'男','area':'河北省','tel':'15901256171','score':'43','reg_time':'2016/05/01 10:12:32','log_time':'2016/05/10 12:16:19'},
+                              {'account':'botue@sina.com','name':'布头儿2','age':25,'sex':'男','area':'河南省','tel':'15901256171','score':'21','reg_time':'2016/05/01 10:12:32','log_time':'2016/05/10 12:16:19'},
+                              {'account':'botue@sina.com','name':'布头儿3','age':23,'sex':'女','area':'河东省','tel':'15901256171','score':'22','reg_time':'2016/05/01 10:12:32','log_time':'2016/05/10 12:16:19'},
+                              {'account':'botue@sina.com','name':'布头儿4','age':25,'sex':'男','area':'河西省','tel':'15901256171','score':'66','reg_time':'2016/05/01 10:12:32','log_time':'2016/05/10 12:16:19'},
+                              {'account':'botue@sina.com','name':'布头儿5','age':27,'sex':'女','area':'河上省','tel':'15901256171','score':'55','reg_time':'2016/05/01 10:12:32','log_time':'2016/05/10 12:16:19'},
+                              {'account':'botue@sina.com','name':'布头儿6','age':22,'sex':'男','area':'河下省','tel':'15901256171','score':'11','reg_time':'2016/05/01 10:12:32','log_time':'2016/05/10 12:16:19'},
+                              {'account':'botue@sina.com','name':'布头儿7','age':21,'sex':'女','area':'河左省','tel':'15901256171','score':'73','reg_time':'2016/05/01 10:12:32','log_time':'2016/05/10 12:16:19'},
                         ]
                   }
+            },
+            methods:{
+                  //搜索
+                  sear:function(){
+                        var input = document.getElementById('sear_text'),
+                        val = input.value,
+                        len = this.user.length;
+                        for(var i = 0; i < len; i++){
+                              if(this.user[i].name === val){
+                                    this.user.splice(0,len,this.user[i]);
+                                    break;
+                              }
+                        }
+                  },
+                  //排序
+                  sort:function(){
+                        var arg = this.getSelected('sort');
+                        this.user.sort(function(a,b){
+                              return a[arg]>b[arg];
+                        });
+                  },
+                  getSelected:function(str){
+                        var ele = document.getElementById(str),
+                        index= ele.selectedIndex;
+                        return  ele.options[index].value;
+                  },
+            },
+            created(){
+                  //预留Ajax请求
             }
       }
 </script>
@@ -98,6 +127,7 @@
                   }
             }
             >.main{
+                  user-select:none;
                   margin-bottom:20px;
                   >.select{
                         padding:15px;
@@ -112,6 +142,7 @@
                                     padding:5px 10px;
                               }
                               .btn-sort{
+                                    cursor:pointer;
                                     padding:5px 10px;
                                     background-color:#5cb85c;
                                     font-size:12px;
@@ -130,6 +161,7 @@
                                     padding:5px 10px;
                               }
                               >.sear{
+                                    cursor:pointer;
                                     padding:5px 10px;
                                     font-size:13px;
                                     border-radius:0 3px 3px 0; 

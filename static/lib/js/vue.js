@@ -636,7 +636,6 @@
             while (i--) {
                 args[i] = arguments$1[i];
             }
-            console.log(this);
             var result = original.apply(this, args);
             var ob = this.__ob__;
             var inserted;

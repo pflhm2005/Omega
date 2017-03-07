@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "babel-loader": "^6.3.2",
-    "body-parser": "^1.17.0",
+    "body-parser": "^1.17.1",
     "css-loader": "^0.26.2",
     "express": "^4.15.0",
     "file-loader": "^0.10.1",

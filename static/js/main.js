@@ -18,6 +18,7 @@ new Vue({
     el: "#box",
     router,
     methods: {
+        //侧边栏的下拉滑动
         task_slide: function() {
             this.aside_toggle('task-ul');
         },

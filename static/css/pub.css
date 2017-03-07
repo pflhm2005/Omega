@@ -1,4 +1,5 @@
 #box > #aside {
+  user-select: node;
   z-index: 10;
   position: fixed;
   left: 0;
