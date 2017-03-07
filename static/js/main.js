@@ -31,6 +31,6 @@ new Vue({
                 len = eles.length,
                 height = parseInt(window.getComputedStyle(eles[0]).height);
             ele.style.height = window.getComputedStyle(ele).height === '0px' ? (height * len + 'px') : 0;
-        }
+        },
     }
 });

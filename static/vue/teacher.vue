@@ -3,7 +3,7 @@
             <div class="addr">
                   <a href="#">讲师管理</a>
                   <span>/</span>
-                  <a href="#">讲师列表</a>
+                  <span>讲师列表</span>
             </div>
             <div class="main">
                   <div class="add"> 
@@ -39,7 +39,7 @@
                                           <td>
                                                 <a href="#" class="btn-check">查 看</a>
                                                 <a href="#" class="btn-edit">编 辑</a>
-                                                <a href="#" class="btn-del">注 销</a>
+                                                <a href="#" class="btn-del" @click.prevent='del(index)'>注 销</a>
                                           </td>
                                     </tr>
                               </template>
@@ -48,7 +48,7 @@
             </div>
             <div class="mask" v-show='mask' @click.self='mask=false'>
                   <form class='add_teacher'>
-                        <span class='del glyphicon glyphicon-remove' @click='mask=false'></span>
+                        <span class='close glyphicon glyphicon-remove' @click='mask=false'></span>
                         <div>
                               <label>姓名</label>
                               <input type="text" v-model='name'>
@@ -99,8 +99,8 @@
                   //搜索
                   sear:function(){
                         var input = document.getElementById('sear_text'),
-                        val = input.value,
-                        len = this.teacher.length;
+                            val = input.value,
+                            len = this.teacher.length;
                         for(var i = 0; i < len; i++){
                               if(this.teacher[i].name === val){
                                     this.teacher.splice(0,len,this.teacher[i]);
@@ -109,60 +109,51 @@
                         }
                   },
                   //添加讲师
-                  add:function(){
-                        
+                  add:function(){ 
                         var newTeacher = {
                               name:this.name,
-                              nickname:this.name,
+                              nickname:this.nickname,
                               age:this.age,
                               sex:this.sex,
                               tel:this.tel
                         };
-                        this.ajax({
+                        // this.$http.post('http://localhost:9000/index/add',newTeacher).then((res)=>{
+                        //       if(res.data === 'success'){
+                        //             this.teacher.push(newTeacher);
+                        //       }
+                        // });
+                        this.mask = false;
+                        jimmy.ajax({
                               url:'http://localhost:9000/index/add',
                               method:'post',
                               data:newTeacher,
                               fn:(data)=>{
+                                    console.log(data);
                                     if(data === 'success'){
                                           this.teacher.push(newTeacher);
                                     }
                               }
                         });
-                        this.mask = false;
                   },
-                  //ajax请求
-                  //应该不会用到get了
-                  ajax:function(obj){
-                        var url = obj.url,
-                            method = obj.method.toLowerCase(),
-                            fn = obj.fn,
-                            data = obj.data,
-                            Data = this.parseData(data);
-                        var xhr = new XMLHttpRequest();
-                        if(method === 'get'){
-                              url = url + '?' + Data;
-                              Data = null;
-                        }
-                        xhr.open(method,url);
-                        if(method = 'post'){
-                              xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                        }
-                        xhr.send(Data);
-                        xhr.onreadystatechange = function(){
-                              if(xhr.status == 200 && xhr.readyState == 4){
-                                    var result = xhr.responseText;
-                                    fn(result);
+                  //为什么发不过去啊
+                  del:function(index){
+                        var delTeacher = {
+                              id : index
+                        };
+                        // this.$http.post('http://localhost:9000/index/del',delTeacher).then((res)=>{
+                        //       console.log(res.data);
+                        //       this.teacher.splice(index-1,1);
+                        // });
+                        //邪门了 自己封装的ajax是OK的
+                        jimmy.ajax({
+                              url:'http://localhost:9000/index/del',
+                              method:'post',
+                              data:delTeacher,
+                              fn:(data) => {
+                                    this.teacher.splice(data,1);
                               }
-                        }
+                        })
                   },
-                  //用于get请求的参数转换
-                  parseData:function(obj){
-                        var finalData = '';
-                        for(var key in obj){
-                              finalData += key + '=' +obj[key] + '&';  
-                        }
-                        return finalData.slice(0,-1);
-                  }
             }
       }
 </script>
@@ -194,7 +185,7 @@
                         margin:100px auto;
                         background-color:white;
                         padding:20px 0;
-                        >.del{
+                        >.close{
                               position:absolute;
                               right:10px;
                               top:10px;

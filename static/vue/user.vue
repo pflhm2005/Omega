@@ -3,7 +3,7 @@
             <div class="addr">
                   <a href="#">用户管理</a>
                   <span>/</span>
-                  <a href="#">用户列表</a>
+                  <span>用户列表</span>
             </div>
             <div class="main">
                   <div class="select">

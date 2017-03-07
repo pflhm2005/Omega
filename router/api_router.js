@@ -5,6 +5,10 @@ var path = require('path');
 var api = express.Router();
 var app = express();
 
+//不知道写什么 重定向吧
+// api.get('/back', function(req, res) {
+//     res.redirect('../login.html');
+// });
 
 //这个路由处理来自index的post请求
 api.post('/', function(req, res) {
@@ -28,6 +32,11 @@ api.post('/add', function(req, res) {
     if (data) {
         res.send('success');
     }
-})
+});
+
+api.post('/del', function(req, res) {
+    var data = req.body;
+    res.send(req.body.id);
+});
 
 module.exports = api;
