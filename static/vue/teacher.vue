@@ -47,7 +47,7 @@
                   </table>
             </div>
             <div class="mask" v-show='mask' @click.self='mask=false'>
-                  <form class='add_teacher' action='/index/add' method='post'>
+                  <form class='add_teacher'>
                         <span class='del glyphicon glyphicon-remove' @click='mask=false'></span>
                         <div>
                               <label>姓名</label>
@@ -63,7 +63,8 @@
                         </div>
                         <div>
                               <label>性别</label>
-                              <input type="radio" checked>男<input type="radio">女
+                              <input type="radio" value='男' v-model='sex'>男
+                              <input type="radio" value='女' v-model='sex'>女
                         </div>
                         <div>
                               <label>手机号码</label>
@@ -71,7 +72,7 @@
                         </div>
                         <div class='btn'>
                               <input type="reset">
-                              <input type="submit">
+                              <input type="submit" @click.prevent='add'>
                         </div>
                   </form>
             </div>
@@ -109,7 +110,58 @@
                   },
                   //添加讲师
                   add:function(){
-                        console.log(this.sex);
+                        
+                        var newTeacher = {
+                              name:this.name,
+                              nickname:this.name,
+                              age:this.age,
+                              sex:this.sex,
+                              tel:this.tel
+                        };
+                        this.ajax({
+                              url:'http://localhost:9000/index/add',
+                              method:'post',
+                              data:newTeacher,
+                              fn:(data)=>{
+                                    if(data === 'success'){
+                                          this.teacher.push(newTeacher);
+                                    }
+                              }
+                        });
+                        this.mask = false;
+                  },
+                  //ajax请求
+                  //应该不会用到get了
+                  ajax:function(obj){
+                        var url = obj.url,
+                            method = obj.method.toLowerCase(),
+                            fn = obj.fn,
+                            data = obj.data,
+                            Data = this.parseData(data);
+                        var xhr = new XMLHttpRequest();
+                        if(method === 'get'){
+                              url = url + '?' + Data;
+                              Data = null;
+                        }
+                        xhr.open(method,url);
+                        if(method = 'post'){
+                              xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                        }
+                        xhr.send(Data);
+                        xhr.onreadystatechange = function(){
+                              if(xhr.status == 200 && xhr.readyState == 4){
+                                    var result = xhr.responseText;
+                                    fn(result);
+                              }
+                        }
+                  },
+                  //用于get请求的参数转换
+                  parseData:function(obj){
+                        var finalData = '';
+                        for(var key in obj){
+                              finalData += key + '=' +obj[key] + '&';  
+                        }
+                        return finalData.slice(0,-1);
                   }
             }
       }

@@ -21,10 +21,13 @@ api.post('/', function(req, res) {
     }
 });
 
+//处理添加系统
+//暂时不会数据库 先返回一个字符串表示爷已收到
 api.post('/add', function(req, res) {
-    console.log(req.body);
-    console.log(req.url);
-    res.send(200);
+    var data = req.body;
+    if (data) {
+        res.send('success');
+    }
 })
 
 module.exports = api;
