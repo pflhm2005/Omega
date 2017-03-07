@@ -54,6 +54,7 @@
   line-height: 20px;
 }
 #box > #aside > .nav > ul > li > ul {
+  transition: all .5s;
   height: 0;
   overflow: hidden;
 }

@@ -6,6 +6,9 @@
                   <a href="#">讲师列表</a>
             </div>
             <div class="main">
+                  <div class="add"> 
+                        <a href="#">添加讲师</a>
+                  </div>
                   <div class="select">
                         <div>
                               <input type="text">
@@ -59,6 +62,18 @@
             }
             >.main{
                   margin-bottom:20px;
+                  >.add{
+                        margin:20px 0;
+                        padding:10px 15px;
+                        background-color:#fff;
+                        overflow:hidden;
+                        a{
+                              float:right;
+                              color:white;
+                              padding:5px 10px;
+                              background-color: #5cb85c;
+                        }
+                  }
                   >.select{
                         padding:15px;
                         background-color:#fff;
@@ -73,7 +88,7 @@
                               }
                               >.sear{
                                     padding:5px 10px;
-                                    font-size:13px;
+                                    font-size:14px;
                                     border-radius:0 3px 3px 0; 
                                     border-style: none;
                                     background-color:#5cb85c;

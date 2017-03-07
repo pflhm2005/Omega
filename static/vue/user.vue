@@ -38,22 +38,24 @@
                               </tr>
                         </thead>
                         <tbody>
-                              <tr>
-                                    <td>1</td>
-                                    <td>botue@sina.com</td>
-                                    <td>布头儿</td>
-                                    <td>28</td>
-                                    <td>男</td>
-                                    <td>河北省</td>
-                                    <td>15901256171</td>
-                                    <td>24</td>
-                                    <td>2016/05/01 10:12:32</td>
-                                    <td>2016/05/10 12:16:19</td>
-                                    <td>
-                                          <a href="javascript:" class="btn-check">查看</a>
-                                          <a href="javascript:" class="btn-lock">锁定</a>
-                                    </td>
-                              </tr>
+                              <template v-for="(list,index) in user">
+                                    <tr>
+                                          <td>{{index+1}}</td>
+                                          <td>{{list.account}}</td>
+                                          <td>{{list.name}}</td>
+                                          <td>{{list.age}}</td>
+                                          <td>{{list.sex}}</td>
+                                          <td>{{list.area}}</td>
+                                          <td>{{list.tel}}</td>
+                                          <td>{{list.score}}</td>
+                                          <td>{{list.reg_time}}</td>
+                                          <td>{{list.log_time}}</td>
+                                          <td>
+                                                <a href="javascript:" class="btn-check">查看</a>
+                                                <a href="javascript:" class="btn-lock">锁定</a>
+                                          </td>
+                                          </tr>
+                              </template>
                         </tbody>
                   </table>
             </div>
@@ -64,6 +66,23 @@
             </ul>
       </div>
 </template>
+<script>
+      export default{
+            data(){
+                  return {
+                        user:[
+                              {'account':'botue@sina.com','name':'布头儿','age':28,'sex':'男','area':'河北省','tel':'15901256171','score':'24','reg_time':'2016/05/01 10:12:32','log_time':'2016/05/10 12:16:19'},
+                              {'account':'botue@sina.com','name':'布头儿2','age':25,'sex':'男','area':'河北省','tel':'15901256171','score':'24','reg_time':'2016/05/01 10:12:32','log_time':'2016/05/10 12:16:19'},
+                              {'account':'botue@sina.com','name':'布头儿3','age':23,'sex':'男','area':'河北省','tel':'15901256171','score':'24','reg_time':'2016/05/01 10:12:32','log_time':'2016/05/10 12:16:19'},
+                              {'account':'botue@sina.com','name':'布头儿4','age':25,'sex':'男','area':'河北省','tel':'15901256171','score':'24','reg_time':'2016/05/01 10:12:32','log_time':'2016/05/10 12:16:19'},
+                              {'account':'botue@sina.com','name':'布头儿5','age':27,'sex':'男','area':'河北省','tel':'15901256171','score':'24','reg_time':'2016/05/01 10:12:32','log_time':'2016/05/10 12:16:19'},
+                              {'account':'botue@sina.com','name':'布头儿6','age':22,'sex':'男','area':'河北省','tel':'15901256171','score':'24','reg_time':'2016/05/01 10:12:32','log_time':'2016/05/10 12:16:19'},
+                              {'account':'botue@sina.com','name':'布头儿7','age':21,'sex':'男','area':'河北省','tel':'15901256171','score':'24','reg_time':'2016/05/01 10:12:32','log_time':'2016/05/10 12:16:19'},
+                        ]
+                  }
+            }
+      }
+</script>
 <style lang="less">
       .list-2{
             >.addr{

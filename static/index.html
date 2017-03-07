@@ -32,7 +32,7 @@
                     <li>
                         <router-link to='/fn3'><span class='glyphicon glyphicon-bell'></span>讲师管理</router-link>
                     </li>
-                    <li id='task'>
+                    <li @click='task_slide'>
                         <a href="#">
                             <span class='glyphicon glyphicon-cog'></span>课程管理<span class='glyphicon glyphicon-menu-right'></span>
                         </a>
@@ -51,12 +51,12 @@
                             </li>
                         </ul>
                     </li>
-                    <li><a href="#"><span class='glyphicon glyphicon-bell'></span>广告管理</a></li>
-                    <li id='sys'>
+                    <!--<li><a href="#"><span class='glyphicon glyphicon-bell'></span>广告管理</a></li>-->
+                    <li @click='setting_slide'>
                         <a href="#">
                             <span class='glyphicon glyphicon-cog'></span>系统设置<span class='glyphicon glyphicon-menu-right'></span>
                         </a>
-                        <ul>
+                        <ul id='setting'>
                             <li>
                                 <a href="#">网站设置</a>
                             </li>

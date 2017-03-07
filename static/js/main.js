@@ -16,5 +16,20 @@ const router = new VueRouter({
 //挂载到对应DOM节点 并传入路由
 new Vue({
     el: "#box",
-    router
+    router,
+    methods: {
+        task_slide: function() {
+            this.aside_toggle('task-ul');
+        },
+        setting_slide: function() {
+            this.aside_toggle('setting');
+        },
+        aside_toggle: function(str) {
+            var ele = document.getElementById(str),
+                eles = ele.children,
+                len = eles.length,
+                height = parseInt(window.getComputedStyle(eles[0]).height);
+            ele.style.height = window.getComputedStyle(ele).height === '0px' ? (height * len + 'px') : 0;
+        }
+    }
 });
