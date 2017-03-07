@@ -3,7 +3,6 @@ var express = require("express");
 var path = require('path');
 //实例化一个路由对象
 var api = express.Router();
-var app = express();
 
 //不知道写什么 重定向吧
 // api.get('/back', function(req, res) {

@@ -37,7 +37,7 @@
                                           <td>{{list.sex}}</td>
                                           <td>{{list.tel}}</td>
                                           <td>
-                                                <a href="#" class="btn-check" @click.prevent='check=true'>查 看</a>
+                                                <a href="#" class="btn-check" @click.prevent='checkout(index)'>查 看</a>
                                                 <a href="#" class="btn-edit">编 辑</a>
                                                 <a href="#" class="btn-del" @click.prevent='del(index)'>注 销</a>
                                           </td>
@@ -80,38 +80,39 @@
                   <div class='check'>
                         <div class="head">
                               <h4>讲师信息</h4>
-                              <span class='glyphicon glyphicon-remove'></span>
+                              <span class='glyphicon glyphicon-remove' @click='check=false'></span>
                         </div>
                         <div class="body">
+                        <template v-for="list in information">
                               <table>
                                     <tr>
                                           <th>姓名：</th>
-                                          <td>赵玉川</td>
+                                          <td>{{list.name}}</td>
                                           <th>职位：</th>
-                                          <td colspan='3'>讲师</td>
+                                          <td colspan='3'>{{list.job}}</td>
                                           <td rowspan='4' width='128'><img src="/images/default.png"></td>
                                     </tr>
                                     <tr>
                                           <th>花名：</th>
-                                          <td>麻衣长老</td>
+                                          <td>{{list.nickname}}</td>
                                           <th>出生日期：</th>
-                                          <td colspan='3'>1985-05-25</td>
+                                          <td colspan='3'>{{list.birth}}</td>
                                     </tr>
                                     <tr>
                                           <th>性别：</th>
-                                          <td>男</td>
+                                          <td>{{list.sex}}</td>
                                           <th>注册日期：</th>
-                                          <td colspan='3'>2015-11-13</td>
+                                          <td colspan='3'>{{list.reg}}</td>
                                     </tr>
                                     <tr>
                                           <th>手机号码：</th>
-                                          <td colspan='2'>13051524959</td>
+                                          <td colspan='2'>{{list.tel}}</td>
                                           <th>邮箱：</th>
-                                          <td colspan='2'>zhaoyuchuan@qq.com</td>
+                                          <td colspan='2'>{{list.email}}</td>
                                     </tr>
                                     <tr>
                                           <th>籍贯：</th>
-                                          <td colspan='6'>河北省 保定市 曲阳县</td>
+                                          <td colspan='6'>{{list.addr}}</td>
                                     </tr>
                                     <tr>
                                           <td colspan='7'>
@@ -123,6 +124,7 @@
                                           </td>
                                     </tr>
                               </table>
+                        </template>
                         </div>
                   </div>
             </div>
@@ -132,21 +134,38 @@
       export default{
             data(){
                   return {
+                        //提交表单所需数据
                         name:null,
                         nickname:null,
                         age:null,
                         sex:null,
                         tel:null,
-                        mask:false, 
+                        //提交表单遮盖层
+                        mask:false,
+                        //查看信息遮盖层 
                         check:false,
-                        teacher:[
-                              {'name':'赵玉川','nickname':'布头儿','age':28,'sex':'男','tel':'15901256171'},                       
-                              {'name':'赵玉川2','nickname':'布头儿','age':28,'sex':'男','tel':'15901256171'},                       
-                              {'name':'赵玉川3','nickname':'布头儿','age':28,'sex':'男','tel':'15901256171'},                       
-                        ]
+                        //教师信息列表
+                        teacher:[],
+                        //教师信息
+                        information:[]
                   }
             },
             methods:{
+                  checkout:function(index){
+                        var obj={id:index};
+                        _.ajax({
+                              url:'http://localhost:9000/data/check',
+                              method:'post',
+                              data:obj,
+                              fn:(data)=>{
+                                    //这样处理主要是方便
+                                    data = JSON.parse(data);
+                                    this.information.pop();
+                                    this.information.push(data);
+                                    this.check=true;
+                              }
+                        });
+                  },
                   //搜索
                   sear:function(){
                         var input = document.getElementById('sear_text'),
@@ -174,12 +193,11 @@
                         //       }
                         // });
                         this.mask = false;
-                        jimmy.ajax({
-                              url:'http://localhost:9000/index/add',
+                        _.ajax({
+                              url:'http://localhost:9000/api/add',
                               method:'post',
                               data:newTeacher,
                               fn:(data)=>{
-                                    console.log(data);
                                     if(data === 'success'){
                                           this.teacher.push(newTeacher);
                                     }
@@ -196,15 +214,26 @@
                         //       this.teacher.splice(index-1,1);
                         // });
                         //邪门了 自己封装的ajax是OK的
-                        jimmy.ajax({
-                              url:'http://localhost:9000/index/del',
+                        _.ajax({
+                              url:'http://localhost:9000/api/del',
                               method:'post',
                               data:delTeacher,
                               fn:(data) => {
                                     this.teacher.splice(data,1);
                               }
-                        })
+                        });
                   },
+            },
+            created(){
+                  //初始化数据
+                  _.ajax({
+                        url:'http://localhost:9000/data/init',
+                        method:'get',
+                        fn:(data) => {
+                              data = JSON.parse(data);
+                              this.teacher.push(...data);
+                        }
+                  });
             }
       }
 </script>

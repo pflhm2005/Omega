@@ -1,4 +1,4 @@
-var jimmy = (function() {
+var _ = (function() {
     // 自封装ajax请求
     // 应该不会用到get了
     function ajax(obj) {
