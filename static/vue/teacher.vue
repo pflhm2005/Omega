@@ -37,7 +37,7 @@
                                           <td>{{list.sex}}</td>
                                           <td>{{list.tel}}</td>
                                           <td>
-                                                <a href="#" class="btn-check">查 看</a>
+                                                <a href="#" class="btn-check" @click.prevent='check=true'>查 看</a>
                                                 <a href="#" class="btn-edit">编 辑</a>
                                                 <a href="#" class="btn-del" @click.prevent='del(index)'>注 销</a>
                                           </td>
@@ -76,6 +76,56 @@
                         </div>
                   </form>
             </div>
+            <div class="mask" v-show='check' @click.self='check=false'>
+                  <div class='check'>
+                        <div class="head">
+                              <h4>讲师信息</h4>
+                              <span class='glyphicon glyphicon-remove'></span>
+                        </div>
+                        <div class="body">
+                              <table>
+                                    <tr>
+                                          <th>姓名：</th>
+                                          <td>赵玉川</td>
+                                          <th>职位：</th>
+                                          <td colspan='3'>讲师</td>
+                                          <td rowspan='4' width='128'><img src="/images/default.png"></td>
+                                    </tr>
+                                    <tr>
+                                          <th>花名：</th>
+                                          <td>麻衣长老</td>
+                                          <th>出生日期：</th>
+                                          <td colspan='3'>1985-05-25</td>
+                                    </tr>
+                                    <tr>
+                                          <th>性别：</th>
+                                          <td>男</td>
+                                          <th>注册日期：</th>
+                                          <td colspan='3'>2015-11-13</td>
+                                    </tr>
+                                    <tr>
+                                          <th>手机号码：</th>
+                                          <td colspan='2'>13051524959</td>
+                                          <th>邮箱：</th>
+                                          <td colspan='2'>zhaoyuchuan@qq.com</td>
+                                    </tr>
+                                    <tr>
+                                          <th>籍贯：</th>
+                                          <td colspan='6'>河北省 保定市 曲阳县</td>
+                                    </tr>
+                                    <tr>
+                                          <td colspan='7'>
+                                                <div class="intro">
+                                                      <p>豫章故郡，洪都新府。星分翼轸，地接衡庐。襟三江而带五湖，控蛮荆而引瓯越。物华天宝，龙光射牛斗之墟；人杰地灵，徐孺下陈蕃之榻。雄州雾列，俊采星驰。台隍枕夷夏之交，宾主尽东南之美。都督阎公之雅望，棨戟遥临；宇文新州之懿范，襜帷暂驻。十旬休假，胜友如云；千里逢迎，高朋满座。腾蛟起凤，孟学士之词宗；紫电青霜，王将军之武库。家君作宰，路出名区；童子何知，躬逢胜饯。</p>
+                                                      <p>时维九月，序属三秋。潦水尽而寒潭清，烟光凝而暮山紫。俨骖騑于上路，访风景于崇阿。临帝子之长洲，得仙人之旧馆。层峦耸翠，上出重霄；飞阁流丹，下临无地。鹤汀凫渚，穷岛屿之萦回；桂殿兰宫，列冈峦之体势。</p>
+                                                      <p>披绣闼，俯雕甍，山原旷其盈视，川泽纡其骇瞩。闾阎扑地，钟鸣鼎食之家；舸舰迷津，青雀黄龙之舳。云销雨霁，彩彻区明。落霞与孤鹜齐飞，秋水共长天一色。渔舟唱晚，响穷彭蠡之滨，雁阵惊寒，声断衡阳之浦。</p>
+                                                </div>
+                                          </td>
+                                    </tr>
+                              </table>
+                        </div>
+                  </div>
+            </div>
       </div>
 </template>
 <script>
@@ -88,6 +138,7 @@
                         sex:null,
                         tel:null,
                         mask:false, 
+                        check:false,
                         teacher:[
                               {'name':'赵玉川','nickname':'布头儿','age':28,'sex':'男','tel':'15901256171'},                       
                               {'name':'赵玉川2','nickname':'布头儿','age':28,'sex':'男','tel':'15901256171'},                       
@@ -164,9 +215,6 @@
                   background-color:white;
                   border:1px solid #eee;
                   margin-bottom:20px;
-                  >a{
-
-                  }
                   >span{
                         padding:0 5px;
                   }
@@ -179,12 +227,64 @@
                   height:100%;
                   background-color:rgba(0,0,0,.5);
                   z-index:999;
+                  >.check{
+                        position:relative;
+                        width:56%;
+                        margin:80px auto;
+                        >.head{
+                              border-radius:5px 5px 0 0;
+                              border:1px solid #ddd;
+                              background-color:#eee;
+                              padding:10px 15px;
+                              >h4{
+                                    color:#333;
+                                    font-size:16px;
+                                    display:inline-block;
+                              }
+                              >span{
+                                    float:right;
+                                    color:#aaa;
+                                    cursor:pointer;
+                              }
+                        }
+                        >.body{
+                              color:#333;
+                              padding:15px;
+                              background:#fff;
+                              >table{
+                                    width:100%;
+                                    >tr{
+                                          >th{
+                                                text-align:left;
+                                                padding:5px;
+                                                border:1px solid #ddd;
+                                          }
+                                          >td{
+                                                border:1px solid #ddd;
+                                                padding:5px;
+                                                >img{
+                                                      width:117px;
+                                                      height:117px;
+                                                }
+                                                >div{
+                                                      padding:15px 10px;
+                                                      >p{
+                                                            margin-bottom:10px;
+                                                      }
+                                                }
+                                          }
+                                    }
+                              }
+                        }
+                  }
                   >.add_teacher{
                         position:relative;
                         width:30%;
                         margin:100px auto;
                         background-color:white;
                         padding:20px 0;
+                        border:1px solid #eee;
+                        border-radius:5px;
                         >.close{
                               position:absolute;
                               right:10px;

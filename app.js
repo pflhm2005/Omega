@@ -32,6 +32,11 @@ var compiler = webpack({
                 loader: 'babel-loader',
                 exclude: /node_modules/
             },
+            //渲染图片
+            {
+                test: /\.(png|jpg|gif|svg)$/,
+                loader: 'file-loader',
+            },
         ]
     },
 });
