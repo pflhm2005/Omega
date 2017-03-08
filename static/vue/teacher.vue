@@ -144,7 +144,7 @@
                         mask:false,
                         //查看信息遮盖层 
                         check:false,
-                        //教师信息列表
+                        //教师列表
                         teacher:[],
                         //教师信息
                         information:[]
@@ -152,16 +152,15 @@
             },
             methods:{
                   checkout:function(index){
-                        var obj={id:index};
+                        var obj={name:this.teacher[index].name};
                         _.ajax({
                               url:'http://localhost:9000/data/check',
                               method:'post',
                               data:obj,
                               fn:(data)=>{
-                                    //这样处理主要是方便
                                     data = JSON.parse(data);
                                     this.information.pop();
-                                    this.information.push(data);
+                                    this.information.push(data[0]);
                                     this.check=true;
                               }
                         });
@@ -187,11 +186,6 @@
                               sex:this.sex,
                               tel:this.tel
                         };
-                        // this.$http.post('http://localhost:9000/index/add',newTeacher).then((res)=>{
-                        //       if(res.data === 'success'){
-                        //             this.teacher.push(newTeacher);
-                        //       }
-                        // });
                         this.mask = false;
                         _.ajax({
                               url:'http://localhost:9000/api/add',
@@ -209,10 +203,6 @@
                         var delTeacher = {
                               id : index
                         };
-                        // this.$http.post('http://localhost:9000/index/del',delTeacher).then((res)=>{
-                        //       console.log(res.data);
-                        //       this.teacher.splice(index-1,1);
-                        // });
                         //邪门了 自己封装的ajax是OK的
                         _.ajax({
                               url:'http://localhost:9000/api/del',

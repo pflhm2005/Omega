@@ -4,11 +4,6 @@ var path = require('path');
 //实例化一个路由对象
 var api = express.Router();
 
-//不知道写什么 重定向吧
-// api.get('/back', function(req, res) {
-//     res.redirect('../login.html');
-// });
-
 //这个路由处理来自index的post请求
 api.post('/', function(req, res) {
     //获取post请求传入的账号密码
