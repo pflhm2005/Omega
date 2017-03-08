@@ -8,13 +8,23 @@ var t_list = require('../database/teacher_list');
 
 var t_info = require('../database/teacher_information');
 
+// 添加数据
+// t_list.adds([
+//     { 'name': '赵玉川', 'nickname': '布头儿', 'age': 28, 'sex': '男', 'tel': '15901256171' },
+//     { 'name': '赵玉川2', 'nickname': '布头儿2', 'age': 25, 'sex': '男', 'tel': '15901556171' },
+//     { 'name': '赵玉川3', 'nickname': '布头儿3', 'age': 24, 'sex': '男', 'tel': '15901776171' },
+// ]);
+
 //信息
 data.post('/check', function(req, res) {
     var obj = { name: req.body.name };
     t_info.find(obj, function(data) {
-        res.send(data);
+        if (data) {
+            res.send(data);
+        } else {
+            res.send('failed');
+        }
     });
-    // res.send(checkData[index]);
 });
 
 //初始化数据
@@ -26,17 +36,20 @@ data.get('/init', function(req, res) {
 });
 
 data.post('/del', function(req, res) {
-
+    var obj = { name: req.body.name };
+    t_list.del(obj, function(data) {
+        res.send(data);
+    })
 });
+
+data.post('/add', function(req, res) {
+    t_list.adds([req.body]);
+    res.send('success');
+})
 
 module.exports = data;
 
-// 添加数据
-// t_list.adds([
-//     { 'name': '赵玉川', 'nickname': '布头儿', 'age': 28, 'sex': '男', 'tel': '15901256171' },
-//     { 'name': '赵玉川2', 'nickname': '布头儿2', 'age': 25, 'sex': '男', 'tel': '15901556171' },
-//     { 'name': '赵玉川3', 'nickname': '布头儿3', 'age': 24, 'sex': '男', 'tel': '15901776171' },
-// ]);
+
 
 // t_info.adds([{
 //         'name': '赵玉川',

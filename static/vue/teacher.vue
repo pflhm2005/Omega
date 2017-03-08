@@ -159,9 +159,14 @@
                               data:obj,
                               fn:(data)=>{
                                     data = JSON.parse(data);
-                                    this.information.pop();
-                                    this.information.push(data[0]);
-                                    this.check=true;
+                                    if(data[0]){
+                                          this.information.pop();
+                                          this.information.push(data[0]);
+                                          this.check=true;
+                                    }
+                                    else{
+                                          alert('msg not found');
+                                    }
                               }
                         });
                   },
@@ -188,10 +193,10 @@
                         };
                         this.mask = false;
                         _.ajax({
-                              url:'http://localhost:9000/api/add',
+                              url:'http://localhost:9000/data/add',
                               method:'post',
                               data:newTeacher,
-                              fn:(data)=>{
+                              fn:(data) =>{
                                     if(data === 'success'){
                                           this.teacher.push(newTeacher);
                                     }
@@ -200,16 +205,16 @@
                   },
                   //为什么发不过去啊
                   del:function(index){
-                        var delTeacher = {
-                              id : index
-                        };
+                        var obj={name:this.teacher[index].name};
                         //邪门了 自己封装的ajax是OK的
                         _.ajax({
-                              url:'http://localhost:9000/api/del',
+                              url:'http://localhost:9000/data/del',
                               method:'post',
-                              data:delTeacher,
+                              data:obj,
                               fn:(data) => {
-                                    this.teacher.splice(data,1);
+                                    if(data === 'success'){
+                                          this.teacher.splice(index,1);
+                                    }
                               }
                         });
                   },

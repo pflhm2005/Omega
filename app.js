@@ -1,5 +1,6 @@
 var express = require('express');
-
+//连接数据库
+//mongod -dbpath "F:Data\db"
 var app = express();
 var morgan = require('morgan');
 app.use(morgan('short'));

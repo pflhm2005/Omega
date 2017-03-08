@@ -23,7 +23,7 @@ function add(obj) {
     var data = new t_info({
         name: obj.name,
         job: obj.job,
-        nickname: obj.name,
+        nickname: obj.nickname,
         birth: obj.birth,
         sex: obj.sex,
         reg: obj.reg,

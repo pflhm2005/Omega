@@ -21,6 +21,7 @@ api.post('/', function(req, res) {
 
 //处理添加系统
 //暂时不会数据库 先返回一个字符串表示爷已收到
+//已学会数据库 这个接口废弃
 api.post('/add', function(req, res) {
     var data = req.body;
     if (data) {
@@ -28,6 +29,7 @@ api.post('/add', function(req, res) {
     }
 });
 
+//这个接口也作废
 api.post('/del', function(req, res) {
     var data = req.body;
     res.send(req.body.id);
