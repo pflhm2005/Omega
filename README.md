@@ -2,13 +2,18 @@
 
 -   运行方法
 
-确保有node，根目录运行
+确保有node与mongodb数据库，根目录运行
 
 ```javascript
+//安装项目依赖
 npm install
+//先运行数据库
+mongod -dbpath "your path"
 //热加载模式与普通模式
 node-dev app(node app)
 ```
+
+连接成功后打开localhost:9000，账号密码默认admin
 
 
 
