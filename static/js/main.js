@@ -2,6 +2,8 @@
 import index from '../vue/index.vue';
 import user from '../vue/user.vue';
 import teacher from '../vue/teacher.vue';
+import task_add from '../vue/task_add.vue';
+import building from '../vue/building.vue';
 
 //生成一个路由实例
 const router = new VueRouter({
@@ -10,6 +12,17 @@ const router = new VueRouter({
         { path: '/fn1', component: index },
         { path: '/fn2', component: user },
         { path: '/fn3', component: teacher },
+        {
+            path: '/fn4',
+            component: { template: '<router-view></router-view>' },
+            children: [
+                { path: "", component: building },
+                { path: "1", component: task_add },
+                { path: "2", component: building },
+                { path: "3", component: building },
+                { path: "4", component: building },
+            ]
+        },
     ]
 });
 
@@ -40,5 +53,8 @@ new Vue({
                 height = parseInt(window.getComputedStyle(eles[0]).height);
             ele.style.height = window.getComputedStyle(ele).height === '0px' ? (height * len + 'px') : 0;
         },
+        test: function() {
+            console.log('get');
+        }
     }
 });

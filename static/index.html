@@ -32,36 +32,36 @@
                     <li>
                         <router-link to='/fn3'><span class='glyphicon glyphicon-bell'></span>讲师管理</router-link>
                     </li>
-                    <li @click='task_slide'>
-                        <a href="#">
-                            <span class='glyphicon glyphicon-cog'></span>课程管理<span class='glyphicon glyphicon-menu-right'></span>
-                        </a>
+                    <li>
+                        <div @click='task_slide'>
+                            <router-link to='/fn4'><span class='glyphicon glyphicon-cog'></span>课程管理<span class='glyphicon glyphicon-menu-right'></span></router-link>
+                        </div>
                         <ul id="task-ul">
                             <li>
-                                <a href="#">课程添加</a>
+                                <router-link to='/fn4/1'>课程添加</router-link>
                             </li>
                             <li>
-                                <a href="#">课程列表</a>
+                                <router-link to='/fn4/2'>课程列表</router-link>
                             </li>
                             <li>
-                                <a href="#">课程分类</a>
+                                <router-link to='/fn4/3'>课程分类</router-link>
                             </li>
                             <li>
-                                <a href="#">课程专题</a>
+                                <router-link to='/fn4/4'>课程专题</router-link>
                             </li>
                         </ul>
                     </li>
                     <!--<li><a href="#"><span class='glyphicon glyphicon-bell'></span>广告管理</a></li>-->
-                    <li @click='setting_slide'>
-                        <a href="#">
-                            <span class='glyphicon glyphicon-cog'></span>系统设置<span class='glyphicon glyphicon-menu-right'></span>
-                        </a>
+                    <li>
+                        <div @click='setting_slide'>
+                            <router-link to='/fn5'><span class='glyphicon glyphicon-cog'></span>系统设置<span class='glyphicon glyphicon-menu-right'></span></router-link>
+                        </div>
                         <ul id='setting'>
                             <li>
-                                <a href="#">网站设置</a>
+                                <router-link to='/fn5/1'>课程添加</router-link>
                             </li>
                             <li>
-                                <a href="#">权限管理</a>
+                                <router-link to='/fn5/2'>课程添加</router-link>
                             </li>
                         </ul>
                     </li>
