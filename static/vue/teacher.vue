@@ -51,15 +51,15 @@
                         <span class='close glyphicon glyphicon-remove' @click='mask=false'></span>
                         <div>
                               <label>姓名</label>
-                              <input type="text" v-model='name'>
+                              <input type="text" v-model='name' placeholder='请输入1-10位中英文'>
                         </div>
                         <div>
                               <label>昵称</label>
-                              <input type="text" v-model='nickname'>
+                              <input type="text" v-model='nickname' placeholder='请输入1-10位中英文'>
                         </div>
                         <div>
                               <label>年龄</label>
-                              <input type="text" v-model='age'>
+                              <input type="text" v-model='age' placeholder='请输入1-3位数字'>
                         </div>
                         <div>
                               <label>性别</label>
@@ -68,7 +68,7 @@
                         </div>
                         <div>
                               <label>手机号码</label>
-                              <input type="text" v-model='tel'>
+                              <input type="text" v-model='tel' placeholder='请输入13位手机号码'>
                         </div>
                         <div class='btn'>
                               <input type="reset">
@@ -154,7 +154,7 @@
                   checkout:function(index){
                         var obj={name:this.teacher[index].name};
                         _.ajax({
-                              url:'http://localhost:9000/data/check',
+                              url:'http://localhost:9000/data/teacher_check',
                               method:'post',
                               data:obj,
                               fn:(data)=>{
@@ -191,9 +191,16 @@
                               sex:this.sex,
                               tel:this.tel
                         };
+                        //表单验证
+                        for(var key in newTeacher){
+                              if(!_.test[key](newTeacher[key])){
+                                    alert('请按规则填写');
+                                    return ;
+                              }
+                        }
                         this.mask = false;
                         _.ajax({
-                              url:'http://localhost:9000/data/add',
+                              url:'http://localhost:9000/data/teacher_add',
                               method:'post',
                               data:newTeacher,
                               fn:(data) =>{
@@ -208,7 +215,7 @@
                         var obj={name:this.teacher[index].name};
                         //邪门了 自己封装的ajax是OK的
                         _.ajax({
-                              url:'http://localhost:9000/data/del',
+                              url:'http://localhost:9000/data/teacher_del',
                               method:'post',
                               data:obj,
                               fn:(data) => {
@@ -217,12 +224,12 @@
                                     }
                               }
                         });
-                  },
+                  }
             },
             created(){
                   //初始化数据
                   _.ajax({
-                        url:'http://localhost:9000/data/init',
+                        url:'http://localhost:9000/data/teacher_init',
                         method:'get',
                         fn:(data) => {
                               data = JSON.parse(data);

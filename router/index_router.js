@@ -5,11 +5,11 @@ var path = require('path');
 var api = express.Router();
 
 //这个路由处理来自index的post请求
-api.post('/', function(req, res) {
+api.all('/', function(req, res) {
     //获取post请求传入的账号密码
     var user = req.body.username,
         password = req.body.password;
-    //进行判断 老子还不会数据库啊
+    //进行判断 这里就不写了
     if (user === 'admin' && password === 'admin') {
         //通过 给你index页面
         res.sendFile(path.join(__dirname, '../static/index.html'));

@@ -34,11 +34,10 @@ var _ = (function(window, $) {
     };
 
     //选择符
-    var getId = str => $.getElementById(str);
-    var getTag = str => $.getElementsByTagName(str);
-    var getClass = str => $.getElementsByClassName(str);
-    var advSear = str => $.querySelectorAll(str);
-    var rquickExpr = /^(?:#([\w-]+)|(\w+)|\.([\w-]+))$/;
+    var getId = str => $.getElementById(str),
+        getTag = str => $.getElementsByTagName(str),
+        advSear = str => $.querySelectorAll(str),
+        rquickExpr = /^(?:#([\w-]+)|(\w+)|\.([\w-]+))$/;
 
     function el(ele) {
         if (rquickExpr.test(ele)) {
@@ -55,8 +54,24 @@ var _ = (function(window, $) {
             return advSear(ele);
         }
     }
+
+    //表单验证的正则匹配函数
+    var name_test = (str) => /^[\u4e00-\u9fa5_a-zA-Z0-9]{1,10}$/.test(str),
+        nickname_test = (str) => /^[\u4e00-\u9fa5_a-zA-Z0-9]{1,10}$/.test(str),
+        age_test = (str) => /^\d{1,2}$/.test(str),
+        sex_test = (str) => str !== null,
+        tel_test = (str) => /^[1][358][0-9]{9}$/.test(str);
+
+    //接口
     return {
         ajax: ajax,
-        el: el
+        el: el,
+        test: {
+            name: name_test,
+            nickname: nickname_test,
+            age: age_test,
+            sex: sex_test,
+            tel: tel_test
+        }
     }
 })(window, document);

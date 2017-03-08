@@ -15,28 +15,34 @@ node-dev app(node app)
 项目结构：
 
 ```javascript
--router 					//路由配置文件夹
----api_router.js				//路由js文件 负责转接请求
+|-database 					//数据库相关配置js文件
+|---CRUP.js					//封装增删改查模块
+|---teacher_information.js	//教师详细信息
+|---teacher_list.js			//教师目录
+|---user_list.js			//用户目录
 
--static						//静态资源文件夹
----css						//样式文件夹
-------...
+|-router 					//路由配置文件夹
+|---api_router.js			//路由js文件 负责转接请求
 
----images					//图片资源
-------...
+|-static					//静态资源文件夹
+|---css						//样式文件夹
+|------...					//一些样式文件
 
----js						//主JS文件夹
-------common.js				//暂时封装了一个ajax模块
-------main.js					//配置vue路由与根元素挂载
+|---images					//图片资源
+|------...					//一些图片资源
 
----lib						//第三方js与css文件
+|---js						//主JS文件夹
+|------common.js			//封装ajax 选择符 表单验证正则模块
+|------main.js				//配置vue路由与根元素挂载
 
----vue						//vue单文件文件夹
+|---lib						//第三方js与css文件
 
--app.js						//服务器配置相关
--package.json				//项目依赖包目录
--README.md					//略
--webpack.config.js			//废弃 配置已经在服务器配置文件中合并
+|---vue						//vue单文件文件夹
+
+|-app.js					//服务器配置相关
+|-package.json				//项目依赖包目录
+|-README.md					//略
+|-webpack.config.js			//废弃 配置已经在服务器配置文件中合并
 ```
 
 

@@ -46,7 +46,7 @@ app.use(webpackDevMiddleware(compiler, {
     // options
 }));
 
-var apiRouter = require("./router/api_router");
+var indexRouter = require("./router/index_router");
 var dataRouter = require("./router/data_router");
 
 var bodyParser = require('body-parser');
@@ -64,7 +64,7 @@ app.get('/', function(req, res) {
 //不要把服务器配置JS文件和静态页面放在同一个文件夹！！！！
 app.use(express.static(path.join(__dirname, 'static')));
 
-app.use("/api", apiRouter);
+app.use("/index", indexRouter);
 app.use("/data", dataRouter);
 
 app.listen(9000);

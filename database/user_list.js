@@ -8,13 +8,17 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection failed'));
 //生成表
 var teacherSchema = mongoose.Schema({
-    name: { type: String, required: true, unique: true },
+    account: { type: String, required: true, unique: true },
     nickname: { type: String, required: true },
     age: { type: Number, required: true },
     sex: { type: String, required: true },
-    tel: { type: Number, required: true },
+    area: { type: String, required: true },
+    tel: { type: String, required: true },
+    score: { type: Number, required: true },
+    reg_time: { type: String, required: true },
+    log_time: { type: String, required: true },
 });
 
-var t = mongoose.model('t', teacherSchema);
+var u = mongoose.model('u', teacherSchema);
 
-module.exports = crup(mongoose, db, t);
+module.exports = crup(mongoose, db, u);

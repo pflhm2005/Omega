@@ -42,7 +42,7 @@
                                     <tr>
                                           <td>{{index+1}}</td>
                                           <td>{{list.account}}</td>
-                                          <td>{{list.name}}</td>
+                                          <td>{{list.nickname}}</td>
                                           <td>{{list.age}}</td>
                                           <td>{{list.sex}}</td>
                                           <td>{{list.area}}</td>
@@ -60,9 +60,9 @@
                   </table>
             </div>
             <ul>
-                  <li><a href="#">上一页</a></li>
-                  <li><a href="#">1</a></li>
-                  <li><a href="#">下一页</a></li>
+                  <li><a>上一页</a></li>
+                  <li><a>1</a></li>
+                  <li><a>下一页</a></li>
             </ul>
       </div>
 </template>
@@ -70,25 +70,17 @@
       export default{
             data(){
                   return {
-                        user:[
-                              {'account':'botue@sina.com','name':'布头儿','age':28,'sex':'男','area':'河北省','tel':'15901256171','score':'43','reg_time':'2016/05/01 10:12:32','log_time':'2016/05/10 12:16:19'},
-                              {'account':'botue@sina.com','name':'布头儿2','age':25,'sex':'男','area':'河南省','tel':'15901256171','score':'21','reg_time':'2016/05/01 10:12:32','log_time':'2016/05/10 12:16:19'},
-                              {'account':'botue@sina.com','name':'布头儿3','age':23,'sex':'女','area':'河东省','tel':'15901256171','score':'22','reg_time':'2016/05/01 10:12:32','log_time':'2016/05/10 12:16:19'},
-                              {'account':'botue@sina.com','name':'布头儿4','age':25,'sex':'男','area':'河西省','tel':'15901256171','score':'66','reg_time':'2016/05/01 10:12:32','log_time':'2016/05/10 12:16:19'},
-                              {'account':'botue@sina.com','name':'布头儿5','age':27,'sex':'女','area':'河上省','tel':'15901256171','score':'55','reg_time':'2016/05/01 10:12:32','log_time':'2016/05/10 12:16:19'},
-                              {'account':'botue@sina.com','name':'布头儿6','age':22,'sex':'男','area':'河下省','tel':'15901256171','score':'11','reg_time':'2016/05/01 10:12:32','log_time':'2016/05/10 12:16:19'},
-                              {'account':'botue@sina.com','name':'布头儿7','age':21,'sex':'女','area':'河左省','tel':'15901256171','score':'73','reg_time':'2016/05/01 10:12:32','log_time':'2016/05/10 12:16:19'},
-                        ]
+                        user:[]
                   }
             },
             methods:{
                   //搜索
                   sear:function(){
-                        var input = _('#sear_text'),
+                        var input = _.el('#sear_text'),
                         val = input.value,
                         len = this.user.length;
                         for(var i = 0; i < len; i++){
-                              if(this.user[i].name === val){
+                              if(this.user[i].nickname === val){
                                     this.user.splice(0,len,this.user[i]);
                                     break;
                               }
@@ -109,6 +101,14 @@
             },
             created(){
                   //预留Ajax请求
+                  _.ajax({
+                        url:'http://localhost:9000/data/user_init',
+                        method:'get',
+                        fn:(data) => {
+                              data = JSON.parse(data);
+                              this.user.push(...data);
+                        }
+                  });
             }
       }
 </script>
