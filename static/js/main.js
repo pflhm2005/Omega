@@ -53,8 +53,16 @@ new Vue({
                 height = parseInt(window.getComputedStyle(eles[0]).height);
             ele.style.height = window.getComputedStyle(ele).height === '0px' ? (height * len + 'px') : 0;
         },
+        active: function() {
+            var nav = _.el('.nav');
+            console.log(nav);
+            event.target.style = 'background-color: #243443;color:white;';
+        },
         test: function() {
             console.log('get');
         }
+    },
+    created() {
+
     }
 });

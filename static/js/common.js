@@ -36,17 +36,18 @@ var _ = (function(window, $) {
     //选择符
     var getId = str => $.getElementById(str),
         getTag = str => $.getElementsByTagName(str),
+        getClass = str => $.getElementsByClassName(str),
         advSear = str => $.querySelectorAll(str),
         rquickExpr = /^(?:#([\w-]+)|(\w+)|\.([\w-]+))$/;
 
     function el(ele) {
         if (rquickExpr.test(ele)) {
-            match = rquickExpr.exec(ele);
-            if (match = match[1]) {
+            matches = rquickExpr.exec(ele);
+            if (match = matches[1]) {
                 return getId(match);
-            } else if (match = match[2]) {
+            } else if (match = matches[2]) {
                 return getTag(match);
-            } else if (match = match[3]) {
+            } else if (match = matches[3]) {
                 return getClass(match);
             }
         }
