@@ -38,6 +38,9 @@ Vue.directive('tel', {
 new Vue({
     el: "#box",
     router,
+    data: {
+        index: 0,
+    },
     methods: {
         //侧边栏的下拉滑动
         task_slide: function() {
@@ -53,11 +56,16 @@ new Vue({
                 height = parseInt(window.getComputedStyle(eles[0]).height);
             ele.style.height = window.getComputedStyle(ele).height === '0px' ? (height * len + 'px') : 0;
         },
+        //点击变色
         active: function() {
-            var nav = _.el('.nav');
-            console.log(nav);
+            var nav = _.el('.nav a'),
+                len = nav.length;
+            for (var i = 0; i < len; i++) {
+                nav[i].style = '';
+            }
             event.target.style = 'background-color: #243443;color:white;';
         },
+        //测试事件使用
         test: function() {
             console.log('get');
         }
