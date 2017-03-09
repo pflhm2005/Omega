@@ -27,7 +27,8 @@ node-dev app(node app)
 |---user_list.js			//用户目录
 
 |-router 					//路由配置文件夹
-|---api_router.js			//路由js文件 负责转接请求
+|---api_router.js			//负责转接页面请求
+|---data_router.js			//负责转接数据请求
 
 |-static					//静态资源文件夹
 |---css						//样式文件夹

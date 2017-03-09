@@ -22,7 +22,7 @@
                 <h5>吉米</h5>
             </div>
             <div class="nav">
-                <ul @click='active'>
+                <ul @click.prevent.stop='active'>
                     <li>
                         <router-link to='/fn1'><span class='glyphicon glyphicon-home'></span>仪表盘</router-link>
                     </li>

@@ -63,7 +63,10 @@ new Vue({
             for (var i = 0; i < len; i++) {
                 nav[i].style = '';
             }
-            event.target.style = 'background-color: #243443;color:white;';
+            //小BUG
+            if (event.target.tagName === 'A') {
+                event.target.style = 'background-color: #243443;color:white;';
+            }
         },
         //测试事件使用
         test: function() {
